@@ -1,0 +1,38 @@
+{
+	"users": [
+		{
+			"_id": "605c5f8f1d1f000000000001",
+			"name": "Alex",
+			"height_cm": 175,
+			"body_type": "athletic",
+			"style": "casual",
+			"favorite_colors": ["blue", "white"]
+		}
+	],
+	"wardrobe": [
+		{
+			"_id": "w1",
+			"category": "shirt",
+			"color": "blue",
+			"occasion": "casual",
+			"comfort": 8,
+			"tags": "casual cotton"
+		},
+		{
+			"_id": "w2",
+			"category": "jeans",
+			"color": "dark blue",
+			"occasion": "casual",
+			"comfort": 7,
+			"tags": "denim relaxed"
+		},
+		{
+			"_id": "w3",
+			"category": "blazer",
+			"color": "black",
+			"occasion": "formal",
+			"comfort": 5,
+			"tags": "smart formal"
+		}
+	]
+}
