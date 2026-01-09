@@ -9,6 +9,10 @@ app = FastAPI(title="StyleUp Backend")
 def root():
     return {"message": "StyleUp backend running"}
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok", "message": "Backend is running smoothly"}
+
 app.add_middleware(
 	CORSMiddleware,
 	allow_origins=["*"],
