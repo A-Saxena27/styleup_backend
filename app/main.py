@@ -3,14 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import router as api_router
 from app.models import connect_db, close_db
 
-app = FastAPI()
+app = FastAPI(title="StyleUp Backend")
 
 @app.get("/")
 def root():
     return {"message": "StyleUp backend running"}
-
-
-app = FastAPI(title="StyleUp Backend")
 
 app.add_middleware(
 	CORSMiddleware,
