@@ -13,6 +13,16 @@ def root():
 def health_check():
     return {"status": "ok", "message": "Backend is running smoothly"}
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+@app.on_event("startup")
+async def startup_event():
+    logging.info("Starting StyleUp backend...")
+    connect_db()
+
+
 app.add_middleware(
 	CORSMiddleware,
 	allow_origins=["*"],
