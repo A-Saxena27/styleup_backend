@@ -2,6 +2,18 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import router as api_router
 from app.models import connect_db, close_db
+from app.db import MONGO_URI
+from pymongo import MongoClient
+
+app = FastAPI()
+
+client = MongoClient(MONGO_URI)
+db = client["styleup"]
+users = db["users"]
+
+@app.get("/")
+def home():
+    return {"status": "StyleUp backend running"}
 
 app = FastAPI(title="StyleUp Backend")
 
