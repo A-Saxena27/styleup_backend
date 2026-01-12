@@ -15,6 +15,23 @@ if API_KEY and API_BASE:
 	openai.api_version = API_VERSION
 	openai.api_base = API_BASE
 	openai.api_key = API_KEY
+import os
+import openai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Azure OpenAI configuration via environment
+API_BASE = os.environ.get('AZURE_OPENAI_API_BASE')
+API_KEY = os.environ.get('AZURE_OPENAI_KEY')
+DEPLOYMENT = os.environ.get('AZURE_OPENAI_DEPLOYMENT')
+API_VERSION = os.environ.get('AZURE_OPENAI_API_VERSION', '2023-05-15')
+
+if API_KEY and API_BASE:
+	openai.api_type = "azure"
+	openai.api_version = API_VERSION
+	openai.api_base = API_BASE
+	openai.api_key = API_KEY
 
 
 def explain_outfit(outfit: dict, user: dict) -> str:

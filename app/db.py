@@ -1,13 +1,18 @@
 from pymongo import MongoClient
 import os
 
+# Provide a tolerant db module: if `MONGO_URI` is not set we keep `client` and
+# `db` as None so the rest of the app (and tests) can run in an in-memory
+# fallback mode implemented in `app.models`.
 MONGO_URI = os.getenv("MONGO_URI")
 
-if not MONGO_URI:
-    raise ValueError("MONGO_URI environment variable not set")
+client = None
+db = None
 
-client = MongoClient(MONGO_URI)
-db = client["styleup"]
+if MONGO_URI:
+    from pymongo import MongoClient
 
-print("✅ Connected to MongoDB")
+    client = MongoClient(MONGO_URI)
+    db = client["styleup"]
+    print("✅ Connected to MongoDB")
 

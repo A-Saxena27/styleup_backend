@@ -7,29 +7,36 @@ from pymongo import MongoClient
 
 client = MongoClient(MONGO_URI)
 db = client["styleup"]
-users = db["users"]
-
-@app.get("/")
-def home():
-    return {"status": "StyleUp backend running"}
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.routes import router as api_router
+from app.models import connect_db, close_db
 
 app = FastAPI(title="StyleUp Backend")
 
+
 @app.get("/")
 def root():
-    return {"message": "StyleUp backend running"}
+	return {"message": "StyleUp backend running"}
+
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok", "message": "Backend is running smoothly"}
+	return {"status": "ok", "message": "Backend is running smoothly"}
 
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
+
 @app.on_event("startup")
-async def startup_event():
-    connect_db()
+async def _startup_event():
+	connect_db()
+
+
+@app.on_event("shutdown")
+async def _shutdown_event():
+	close_db()
 
 
 app.add_middleware(
@@ -41,15 +48,7 @@ app.add_middleware(
 )
 
 
-@app.on_event("startup")
-async def startup_event():
-	connect_db()
+app.include_router(api_router)
 
 
-@app.on_event("shutdown")
-async def shutdown_event():
-	close_db()
-
-
-app.include_router(router)
 
