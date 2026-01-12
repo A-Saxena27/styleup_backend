@@ -5,8 +5,6 @@ from app.models import connect_db, close_db
 from app.db import MONGO_URI
 from pymongo import MongoClient
 
-app = FastAPI()
-
 client = MongoClient(MONGO_URI)
 db = client["styleup"]
 users = db["users"]
@@ -31,7 +29,6 @@ logging.basicConfig(level=logging.INFO)
 
 @app.on_event("startup")
 async def startup_event():
-    logging.info("Starting StyleUp backend...")
     connect_db()
 
 
@@ -54,5 +51,5 @@ async def shutdown_event():
 	close_db()
 
 
-app.include_router(api_router, prefix="/api")
+app.include_router(router)
 

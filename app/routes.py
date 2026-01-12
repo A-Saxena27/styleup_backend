@@ -4,6 +4,7 @@ from typing import List, Optional, Any
 from app import models
 from app import recommender
 from app import chatbot
+from app.db import db
 
 router = APIRouter()
 
@@ -69,3 +70,8 @@ def chat_styleup(req: ChatRequest):
 		raise HTTPException(status_code=404, detail="User not found")
 	explanation = chatbot.explain_outfit(req.outfit, user)
 	return {"explanation": explanation}
+
+@router.get("/test-db")
+def test_db():
+    db.test.insert_one({"status": "connected"})
+    return {"message": "MongoDB connected"}
