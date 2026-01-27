@@ -107,6 +107,3 @@ To enable it:
 	- `AZURE_WEBAPP_PUBLISH_PROFILE` — contents of the publish profile XML
 3. Push to `main` to trigger the workflow.
 
-
-Questions or want me to run quick local tests? I can start the server and show sample requests.
-
