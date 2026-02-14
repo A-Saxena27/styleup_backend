@@ -13,3 +13,5 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+.env
+desktop.ini
